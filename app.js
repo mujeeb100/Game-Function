@@ -37,7 +37,10 @@ const getPlayerChoice = ()=>{
 
    
 
-    const getWinner = (cChoice,pChoice) =>
+    const getWinner = (
+        cChoice,
+        pChoice =  DEFAULT_USER_CHOICE
+         ) =>
          cChoice === pChoice 
         ? RESULT_DRAW 
         :   (cChoice ===ROCK && pChoice=== PAPER)||
@@ -69,6 +72,23 @@ startGameBtn.addEventListener('click', ()=>{
     const playerChoice = getPlayerChoice();
     //console.log(playerSelection);
     const computerChoice = getComputerChoice();
-    const winner = getWinner(computerChoice, playerChoice);
-    console.log(winner);
+    let winner;
+    if(playerChoice){
+        winner = getWinner (computerChoice,playerChoice);
+    }else {
+        winner = getWinner(computerChoice);
+    }
+    //const winner = getWinner(computerChoice, playerChoice);
+    let message = `You picked ${playerChoice || DEFAULT_USER_CHOICE}, computer picked $(computerChoice),therefor you`;
+    if(winner===RESULT_DRAW){
+        message = message + 'had a draw';
+    } else if (winner === RESULT_PLAYER_WINS){
+        message = message + 'won';
+    }else {
+        message = message + 'lost';
+    }
+    alert (message);
+    gameIsRunning = false;
 });
+
+const 
