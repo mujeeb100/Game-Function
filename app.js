@@ -63,8 +63,8 @@ const getPlayerChoice = ()=>{
                  } */
             
 
-startGameBtn.addEventListener('click', ()=>{
-    if (gameIsRunning){
+startGameBtn.addEventListener('click', ()=> {
+    if (gameIsRunning) {
     return;
     }
     gameIsRunning = true;
@@ -91,4 +91,65 @@ startGameBtn.addEventListener('click', ()=>{
     gameIsRunning = false;
 });
 
-const 
+// not releted to game
+
+const combine = (resultHnadler,operation,   ...numbers ) => {
+const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+};
+
+
+
+let sum = 0;
+for (const num of numbers){
+    if(operation === 'ADD') {
+    sum += validateNumber(num);
+    } else {
+        sum -= validateNumber(num);
+    }
+}
+resultHnadler(sum);
+};
+
+
+/*
+const subtractUp = function(resultHnadler, ...numbers){
+    let sum = 0;
+for (const num of numbers){ //dont use that
+    sum -= num;
+    }
+resultHnadler(sum,  'The result after adding all number is');
+}; */
+
+const showResult = (messageText, result ) => {
+    alert(messageText + ' ' +result);
+};
+
+
+combine(
+    showResult.bind(this, 'The result after adding all numbers is: '),
+'ADD',
+1, 
+5,
+'fdsa', 
+-3, 
+6, 
+10);
+combine(
+    showResult.bind(this, 'The result after adding all numbers is: '),
+'ADD',
+1, 
+5, 
+-10,
+-3,
+6,
+10,
+25,
+88);
+combine(
+    showResult.bind(this, 'The result after adding all numbers is: '),
+'SUBTRACT',
+1,
+10,
+15,
+20);
